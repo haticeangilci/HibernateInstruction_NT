@@ -1,32 +1,34 @@
-package com.tpe.hb01.basicannotations;
-
-//hedef:
-//dataları persist etmek için bu classa karşılık bir tablo gerekli
-//tablonun sütunları:id,name,grade
-//create table student(id int, name varchar...)
-//hibernate(ORM) bizim için bu hedefi otomatik olarak yapar.
+package com.tpe.hb03.uni_onetoone;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity//bu sinifin DB de bir tabloya karsilik gelmesini sagliyoruz, tablonun adı: student
-@Table(name = "t_student")//tablonun ismini kendimiz verebiliriz.OPSİYONEL
-//!!! Javaca konuşurken bu sınıfı belirtirken Student,
-//SQLce konuşurken t_student kullanırız.
-public class Student {
+@Entity
+@Table(name = "t_student03")
+public class Student03 {
 
-    @Id//id sütununa PK kısıtlamasının eklenmesini sağlar
-    //@Column(name = "std_id")
+    @Id
     private Integer id;
 
     @Column(name = "student_name",nullable = false,unique = true,length = 50)//default : varchar(255)
-    private String name;//not null
+    private String name;
+
     private int grade;
 
+    //const
+    public Student03() {
+    }
+
+    public Student03(Integer id, String name, int grade) {
+        this.id = id;
+        this.name = name;
+        this.grade = grade;
+    }
 
     //getter-setter
+
     public Integer getId() {
         return id;
     }
@@ -52,9 +54,10 @@ public class Student {
     }
 
     //toString
+
     @Override
     public String toString() {
-        return "Student{" +
+        return "Student03{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", grade=" + grade +

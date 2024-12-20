@@ -7,22 +7,23 @@ import javax.persistence.Transient;
 
 @Entity
 public class Employee {
+
     @Id
     private Long id;
 
     private String name;
 
-    private Double salary;
+    private Double salary;//50$
 
     @Transient//DB de bu fielda karşılık bir sütun oluşmasını engeller
     private Double bonus;//50
     //bonusun tabloda yer almasına gerek yok
 
-    //resimli dosyalarda aşağıdaki anatasyonu örnek verildi.
-    //@Lob//Large Object: bu sütunda büyük boyutlu datalar saklanır:resim,video,ses....
-    //private byte[] image;//memory de çok yer kaptalayacağı için bunun yerine adresi referans olarak gösterilir..
+//    @Lob//Large Object: bu sütunda büyük boyutlu datalar saklanır:resim,video,ses...
+//    private byte[] image;
 
-    //getters and setters
+    //getter-setter
+
 
     public Long getId() {
         return id;

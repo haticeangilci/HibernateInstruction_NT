@@ -1,21 +1,10 @@
-package com.tpe.hb01.basicannotations;
+package com.tpe.hb02.embeddable;
 
-//hedef:
-//dataları persist etmek için bu classa karşılık bir tablo gerekli
-//tablonun sütunları:id,name,grade
-//create table student(id int, name varchar...)
-//hibernate(ORM) bizim için bu hedefi otomatik olarak yapar.
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity//bu sinifin DB de bir tabloya karsilik gelmesini sagliyoruz, tablonun adı: student
-@Table(name = "t_student")//tablonun ismini kendimiz verebiliriz.OPSİYONEL
-//!!! Javaca konuşurken bu sınıfı belirtirken Student,
-//SQLce konuşurken t_student kullanırız.
-public class Student {
+@Entity
+@Table(name = "t_student02")
+public class Student02 {
 
     @Id//id sütununa PK kısıtlamasının eklenmesini sağlar
     //@Column(name = "std_id")
@@ -23,10 +12,40 @@ public class Student {
 
     @Column(name = "student_name",nullable = false,unique = true,length = 50)//default : varchar(255)
     private String name;//not null
+
     private int grade;
+
+//    private String street;
+//    private String city;
+//    private String country;
+//    private String zipcode;
+
+    @Embedded//gömülü:OPSİYONEL
+    private Address address;
+
+    //paramsiz const:hibernate fetch işlemlerinde default const kullanır.
+    public Student02() {
+    }
+
+    //paramli const
+    public Student02(Integer id, String name, int grade) {
+        this.id = id;
+        this.name = name;
+        this.grade = grade;
+    }
 
 
     //getter-setter
+
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -52,9 +71,10 @@ public class Student {
     }
 
     //toString
+
     @Override
     public String toString() {
-        return "Student{" +
+        return "Student02{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", grade=" + grade +
