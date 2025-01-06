@@ -1,12 +1,11 @@
-package com.tpe.practice;
+package com.tpe.recap.relations_bi;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "p_instructor")
+@Table(name = "r2_instructor")
 public class Instructor {
 
     @Id
@@ -16,8 +15,10 @@ public class Instructor {
     @Column(nullable = false)
     private String name;
 
+
     @OneToMany(mappedBy = "instructor")
-    private List<Course> courses=new ArrayList<>();
+    //@JoinColumn
+    private List<Course> courseList=new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -35,12 +36,12 @@ public class Instructor {
         this.name = name;
     }
 
-    public List<Course> getCourses() {
-        return courses;
+    public List<Course> getCourseList() {
+        return courseList;
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
     }
 
     @Override

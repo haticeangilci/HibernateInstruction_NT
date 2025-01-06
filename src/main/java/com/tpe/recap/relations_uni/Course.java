@@ -1,12 +1,12 @@
-package com.tpe.practice;
+package com.tpe.recap.relations_uni;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "p_course")
-public class Course {
+@Table(name = "r_course")
+public class Course {//many
 
     @Id
     private Integer id;
@@ -16,11 +16,8 @@ public class Course {
 
     private Integer credit;
 
-    @ManyToMany(mappedBy = "courses")//fetchType:LAZY
-    private List<Student> studentList=new ArrayList<>();
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Instructor instructor;
+    @ManyToOne//bu kurs kim tarafından veriliyor
+    private Instructor instructor;//pk sütunundaki id değeri kimlik olarak kullanılır
 
     public Course() {
     }
@@ -55,13 +52,6 @@ public class Course {
         this.credit = credit;
     }
 
-    public List<Student> getStudentList() {
-        return studentList;
-    }
-
-    public void setStudentList(List<Student> studentList) {
-        this.studentList = studentList;
-    }
 
     public Instructor getInstructor() {
         return instructor;

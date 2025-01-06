@@ -1,4 +1,4 @@
-package com.tpe.practice;
+package com.tpe.recap.relations_uni;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -6,7 +6,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "p_student")
+@Table(name = "r_student")
 public class Student {
 
     @Id
@@ -17,9 +17,14 @@ public class Student {
     @Column(name = "student_name",nullable = false,length = 50)
     private String name;
 
+    @Transient//bu field için sütun oluşturma
+    private int bonus;
+
     private Integer grade;
 
-    @ManyToMany(fetch = FetchType.EAGER)//jointable
+    @ManyToMany//tablolar arasındaki ilişkinin kurulmasını sağlar
+    @JoinTable(name = "std_course",joinColumns ={@JoinColumn(name = "std_id")},
+    inverseJoinColumns = {@JoinColumn(name = "course_id")})
     private Set<Course> courses=new HashSet<>();
 
     public Student() {
@@ -60,6 +65,14 @@ public class Student {
 
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    public int getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(int bonus) {
+        this.bonus = bonus;
     }
 
     @Override

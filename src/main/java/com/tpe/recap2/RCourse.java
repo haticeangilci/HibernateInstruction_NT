@@ -1,13 +1,15 @@
-package com.tpe.practice;
+package com.tpe.recap2;
+
+import com.tpe.practice.Instructor;
+import com.tpe.practice.Student;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "p_course")
-public class Course {
-
+@Table(name = "tbl_course")
+public class RCourse {//owner of relation
     @Id
     private Integer id;
 
@@ -16,16 +18,13 @@ public class Course {
 
     private Integer credit;
 
-    @ManyToMany(mappedBy = "courses")//fetchType:LAZY
-    private List<Student> studentList=new ArrayList<>();
+    @ManyToOne
+    private RInstructor instructor;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Instructor instructor;
-
-    public Course() {
+    public RCourse() {
     }
 
-    public Course(Integer id, String name, Integer credit) {
+    public RCourse(Integer id, String name, Integer credit) {
         this.id = id;
         this.name = name;
         this.credit = credit;
@@ -55,19 +54,12 @@ public class Course {
         this.credit = credit;
     }
 
-    public List<Student> getStudentList() {
-        return studentList;
-    }
 
-    public void setStudentList(List<Student> studentList) {
-        this.studentList = studentList;
-    }
-
-    public Instructor getInstructor() {
+    public RInstructor getInstructor() {
         return instructor;
     }
 
-    public void setInstructor(Instructor instructor) {
+    public void setInstructor(RInstructor instructor) {
         this.instructor = instructor;
     }
 
